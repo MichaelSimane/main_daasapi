@@ -41,3 +41,8 @@ class RainPrediction_YJ(APIView):
         rain_predicted3 = model3.predict([[year, month, day, tmax]])          
         # response_dict = {"Predicted if there is rain for 3 month": rain_predicted}
         return Response(rain_predicted3, status=200)
+
+
+
+
+
