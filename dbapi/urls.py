@@ -2,6 +2,9 @@ from django.urls import path, re_path as url
 from .views import *
 from dbapi import views
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [      
     url(r'^district$', views.DistrictApi),
     url(r'^district/([0-9]+)$', views.DistrictApi),    
@@ -22,5 +25,10 @@ urlpatterns = [
     url(r'^replymessage/([0-9]+)$', views.ReplyMessageApi),    
 
     url(r'^comment$', views.CommentsApi),
-    url(r'^comment/([0-9]+)$', views.CommentsApi),    
-]
+    url(r'^comment/([0-9]+)$', views.CommentsApi), 
+
+    url(r'^analyzed$', views.AnalyzedDataApi),
+    url(r'^analyzed/([0-9]+)$', views.AnalyzedDataApi), 
+
+    url(r'^weather/savefile$', views.SaveFileApi),
+]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

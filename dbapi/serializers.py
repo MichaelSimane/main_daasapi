@@ -9,12 +9,12 @@ class DistrictSerializer(serializers.ModelSerializer):
 class WeatherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Weather
-        fields=('id', 'year', 'month', 'day', 'tmin', 'tmax', 'rain')
+        fields=('id', 'year', 'month', 'day', 'tmin', 'tmax', 'rain', 'district')
 
 class SoilSerializer(serializers.ModelSerializer):
     class Meta:
         model = Soil
-        fields=('id', 'type', 'ph')
+        fields=('id', 'type', 'ph', 'district')
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,3 +35,8 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
         fields=('id', 'PostMessage', 'reply', 'date')
+
+class AnalyzedDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields=('id', 'date', 'district', 'sowing', 'harvesting')

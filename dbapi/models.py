@@ -20,7 +20,7 @@ class Weather(models.Model):
     tmin = models.FloatField() 
     tmax = models.FloatField() 
     rain = models.FloatField() 
-    # district = models.ForeignKey(District, on_delete=models.CASCADE)
+    district = models.ForeignKey(District, on_delete=models.CASCADE,default=1)
 
     def __str__(self):
         return f"{self.id} {self.year} {self.month} {self.day} {self.tmin} {self.tmax} {self.rain} {self.district}"
@@ -28,9 +28,9 @@ class Weather(models.Model):
 class Soil(models.Model):
     type = models.CharField(max_length=10)
     ph = models.FloatField()
-
+    district = models.ForeignKey(District, on_delete=models.CASCADE, default=1)
     def __str__(self):
-        return f"{self.id} {self.type} {self.ph}"
+        return f"{self.id} {self.type} {self.ph} {self.district}"
 
 class User(models.Model):
     fname = models.CharField(max_length=20)
@@ -66,6 +66,15 @@ class Comments(models.Model):
 
     def __str__(self):
         return f"{self.id} {self.user} {self.comment} {self.date}"
+    
+class AnalyzedData(models.Model):
+    date = models.DateTimeField(auto_now=True, auto_now_add=False)
+    district = models.ForeignKey(District, on_delete=models.CASCADE, default=1)
+    sowing = models.BooleanField()
+    harvesting = models.BooleanField()
+
+    def __str__(self):
+        return f"{self.id} {self.date} {self.district} {self.sowing}, {self.harvesting}"
 
 
     

@@ -42,6 +42,47 @@ class RainPrediction_YJ(APIView):
         # response_dict = {"Predicted if there is rain for 3 month": rain_predicted}
         return Response(rain_predicted3, status=200)
 
+class HarvestRainPrediction(APIView):
+    def post(self, request):
+        data = request.data
+        year = data['year']
+        month = data['month']
+        day = data['day']
+        tmin = data['tmin']  
+        tmax = data['tmax']        
+        harvestmodel = ApiConfig.harvestmodel  
+
+        rain_predicted = harvestmodel.predict([[year, month, day, tmin, tmax]])  
+        
+        return Response(rain_predicted, status=200)
+
+class HarvestRainPrediction_DE(APIView):
+    def post(self, request):
+        data = request.data
+        year = data['year']
+        month = data['month']
+        day = data['day']
+        tmin = data['tmin']
+        tmax = data['tmax']  
+        harvestmodel2 = ApiConfig.harvestmodel2
+               
+        rain_predicted2 = harvestmodel2.predict([[year, month, day, tmin, tmax]]) 
+        # response_dict = {"Predicted if there is rain for 3 month": rain_predicted}
+        return Response(rain_predicted2, status=200)
+
+class HarvestRainPrediction_YJ(APIView):
+    def post(self, request):
+        data = request.data
+        year = data['year']
+        month = data['month']
+        day = data['day']
+        tmin = data['tmin']
+        tmax = data['tmax']
+        harvestmodel3 = ApiConfig.harvestmodel3           
+        rain_predicted3 = harvestmodel3.predict([[year, month, day, tmin, tmax]])          
+        # response_dict = {"Predicted if there is rain for 3 month": rain_predicted}
+        return Response(rain_predicted3, status=200)
+
 
 
 
