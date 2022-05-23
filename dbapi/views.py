@@ -1,3 +1,4 @@
+import statistics
 from django.shortcuts import render
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
@@ -61,6 +62,18 @@ def WeatherApi(request, id=0):
         weather = Weather.objects.get(id = id)
         weather.delete()
         return JsonResponse("Deleted Successfully", safe=False)
+
+
+@csrf_exempt
+def WeatherDetailApi(request, pk, year, month, day):
+    try:
+        weather = Weather.objects.get(year=year, month=month, day=day, district=pk)
+        tmean = (weather.tmin + weather.tmax) / 2
+    except Weather.DoesNotExist:
+        return Response(status=statistics.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':        
+        return JsonResponse(tmean, safe=False)
 
 @csrf_exempt
 def SoilApi(request, id=0):
