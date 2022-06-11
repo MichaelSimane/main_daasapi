@@ -34,7 +34,7 @@ class ReplyMessageSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
-        fields=('id', 'PostMessage', 'reply', 'date')
+        fields=('id', 'user', 'comment', 'date')
 
 class AnalyzedDataSerializer(serializers.ModelSerializer):
     class Meta:

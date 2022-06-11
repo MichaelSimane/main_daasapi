@@ -11,7 +11,7 @@ urlpatterns = [
 
     url(r'^weather$', views.WeatherApi),
     url(r'^weather/([0-9]+)$', views.WeatherApi),
-    path('weatherdetail/<int:year>/<int:month>/<int:day>/<int:pk>', views.WeatherDetailApi),    
+    path('weatherdetail/<int:year>/<int:month>/<int:day>/<str:district>', views.WeatherDetailApi),    
 
     url(r'^soil$', views.SoilApi),
     url(r'^soil/([0-9]+)$', views.SoilApi),    

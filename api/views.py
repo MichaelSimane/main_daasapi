@@ -83,6 +83,44 @@ class HarvestRainPrediction_YJ(APIView):
         # response_dict = {"Predicted if there is rain for 3 month": rain_predicted}
         return Response(rain_predicted3, status=200)
 
+class LocustPrediction(APIView):
+    def post(self, request):
+        data = request.data
+        year = data['year']
+        month = data['month']
+        day = data['day']
+        tmax = data['tmax']        
+        locust = ApiConfig.model  
+
+        locust_predicted = locust.predict([[year, month, day, tmax]])  
+        
+        return Response(locust_predicted, status=200)
+
+class LocustPrediction_DE(APIView):
+    def post(self, request):
+        data = request.data
+        year = data['year']
+        month = data['month']
+        day = data['day']
+        tmax = data['tmax']  
+        locust2 = ApiConfig.locust2
+               
+        locust_predicted2 = locust2.predict([[year, month, day, tmax]]) 
+        # response_dict = {"Predicted if there is rain for 3 month": rain_predicted}
+        return Response(locust_predicted2, status=200)
+
+class LocustPrediction_YJ(APIView):
+    def post(self, request):
+        data = request.data
+        year = data['year']
+        month = data['month']
+        day = data['day']
+        tmax = data['tmax']
+        locust3 = ApiConfig.locust3           
+        locust_predicted3 = locust3.predict([[year, month, day, tmax]])          
+        # response_dict = {"Predicted if there is rain for 3 month": rain_predicted}
+        return Response(locust_predicted3, status=200)
+
 
 
 

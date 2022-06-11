@@ -1,6 +1,5 @@
 from datetime import date
 from django.db import models
-from pandas import StringDtype
 
 # Create your models here.
 class District(models.Model):
@@ -46,7 +45,7 @@ class User(models.Model):
 class PostMessage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.CharField(max_length=256)
-    date = models.DateTimeField(auto_now=True, auto_now_add=False)
+    date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.id} {self.user} {self.message} {self.date}"
@@ -54,7 +53,7 @@ class PostMessage(models.Model):
 class ReplyMessage(models.Model):
     PostMessage = models.ForeignKey(PostMessage, on_delete=models.CASCADE)
     reply = models.CharField(max_length=50)
-    date = models.DateTimeField(auto_now=True, auto_now_add=False)
+    date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.id} {self.PostMessage} {self.reply} {self.date}"
@@ -62,13 +61,13 @@ class ReplyMessage(models.Model):
 class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.CharField(max_length=256)
-    date = models.DateTimeField(auto_now=True, auto_now_add=False)
+    date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.id} {self.user} {self.comment} {self.date}"
     
 class AnalyzedData(models.Model):
-    date = models.DateTimeField(auto_now=True, auto_now_add=False)
+    date = models.DateTimeField(auto_now=True)
     district = models.ForeignKey(District, on_delete=models.CASCADE, default=1)
     sowing = models.BooleanField()
     harvesting = models.BooleanField()

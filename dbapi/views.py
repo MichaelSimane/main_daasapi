@@ -65,10 +65,11 @@ def WeatherApi(request, id=0):
 
 
 @csrf_exempt
-def WeatherDetailApi(request, pk, year, month, day):
+def WeatherDetailApi(request, district, year, month, day):
     try:
-        weather = Weather.objects.get(year=year, month=month, day=day, district=pk)
-        tmean = (weather.tmin + weather.tmax) / 2
+        district = District.objects.get(Name=district)
+        weather = Weather.objects.get(year=year, month=month, day=day, district=district.id)
+        tmean = float((weather.tmin + weather.tmax) / 2)
     except Weather.DoesNotExist:
         return Response(status=statistics.HTTP_404_NOT_FOUND)
 
@@ -152,6 +153,17 @@ def PostMessageApi(request, id=0):
         postmessage = PostMessage.objects.get(id = id)
         postmessage.delete()
         return JsonResponse("Deleted Successfully", safe=False)
+
+@csrf_exempt
+def GetPostMessageApi(request, id):
+    try:
+        post = PostMessage.objects.get(id=id)        
+    except Weather.DoesNotExist:
+        return Response(status=statistics.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET': 
+        postmessage_serializer = PostMessageSerializer(data=post)       
+        return JsonResponse(postmessage_serializer, safe=False)
 
 @csrf_exempt
 def ReplyMessageApi(request, id=0):
