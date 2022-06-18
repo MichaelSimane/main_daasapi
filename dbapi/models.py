@@ -39,7 +39,7 @@ class User(models.Model):
     pnumber = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"{self.id} {self.fname} {self.laname} {self.email} {self.password} {self.pnumber}"
+        return f"{self.id} {self.fname} {self.lname} {self.email} {self.password} {self.pnumber}"
 
 
 class PostMessage(models.Model):

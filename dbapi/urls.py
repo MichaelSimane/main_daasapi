@@ -11,10 +11,12 @@ urlpatterns = [
 
     url(r'^weather$', views.WeatherApi),
     url(r'^weather/([0-9]+)$', views.WeatherApi),
-    path('weatherdetail/<int:year>/<int:month>/<int:day>/<str:district>', views.WeatherDetailApi),    
+    path('weatherdetail/<int:year>/<int:month>/<int:day>/<str:district>', views.WeatherDetailApi), 
+    path('WeatherDetailReportApi/<int:year>/<int:month>/<str:district>', views.WeatherDetailReportApi),    
 
     url(r'^soil$', views.SoilApi),
-    url(r'^soil/([0-9]+)$', views.SoilApi),    
+    url(r'^soil/([0-9]+)$', views.SoilApi),  
+    path('soildetail/<str:district>', views.SoilDetailApi),   
 
     url(r'^user$', views.UserApi),
     url(r'^user/([0-9]+)$', views.UserApi),    

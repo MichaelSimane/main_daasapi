@@ -77,6 +77,19 @@ def WeatherDetailApi(request, district, year, month, day):
         return JsonResponse(tmean, safe=False)
 
 @csrf_exempt
+def WeatherDetailReportApi(request, district, year, month):
+    try:
+        district = District.objects.get(Name=district)
+        
+        weather = Weather.objects.filter(year=year, month__range=[month, month+1], district=district.id)
+        weather_serializer = WeatherSerializer(weather, many=True)        
+    except Weather.DoesNotExist:
+        return Response(status=statistics.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':        
+        return JsonResponse(weather_serializer.data, safe=False)
+
+@csrf_exempt
 def SoilApi(request, id=0):
     if request.method == 'GET':
         soil = Soil.objects.all()
@@ -102,6 +115,17 @@ def SoilApi(request, id=0):
         soil.delete()
         return JsonResponse("Deleted Successfully", safe=False)
 
+@csrf_exempt
+def SoilDetailApi(request, district):
+    try:
+        district = District.objects.get(Name=district)        
+        soil = Soil.objects.get(district=district.id)
+        soil_serializer = SoilSerializer(soil)        
+    except Weather.DoesNotExist:
+        return Response(status=statistics.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':        
+        return JsonResponse(soil_serializer.data, safe=False)
 @csrf_exempt
 def UserApi(request, id=0):
     if request.method == 'GET':
