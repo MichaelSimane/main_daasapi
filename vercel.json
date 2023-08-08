@@ -12,11 +12,7 @@
             "config": { "distdir": "staticfiles_buils" }
         }
     ],
-    "routes": [
-        {
-            "src": "/static/(.*)",
-            "dest": "/static/$1"
-        },
+    "routes": [       
         {
             "src": "/(.*)",
             "dest": "DAAS_API/wsgi.py"
