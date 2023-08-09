@@ -1,18 +1,13 @@
 {
-    "version": 2,
-    "builds":[
+    "builds": [
         {
             "src": "DAAS_API/wsgi.py",
             "use": "@vercel/python",
-            "config": { "maxLamdaSize": "15mb", "runtime": "python3.9" }
-        },
-        {
-            "src": "build_files.sh",
-            "use": "@vercel/static-build",
-            "config": { "distdir": "staticfiles_buils" }
+            "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
         }
     ],
-    "routes": [       
+
+    "routes": [
         {
             "src": "/(.*)",
             "dest": "DAAS_API/wsgi.py"
