@@ -35,36 +35,35 @@ class User(models.Model):
     fname = models.CharField(max_length=20)
     lname = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=156)
+    password = models.CharField(max_length=256)
     pnumber = models.CharField(max_length=20)
 
     def __str__(self):
         return f"{self.id} {self.fname} {self.lname} {self.email} {self.password} {self.pnumber}"
 
+class PostMessage(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.CharField(max_length=256)
+    date = models.DateTimeField(auto_now=True)
 
-# class PostMessage(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     message = models.CharField(max_length=256)
-#     date = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return f"{self.id} {self.user} {self.message} {self.date}"
 
-#     def __str__(self):
-#         return f"{self.id} {self.user} {self.message} {self.date}"
+class ReplyMessage(models.Model):
+    PostMessage = models.ForeignKey(PostMessage, on_delete=models.CASCADE)
+    reply = models.CharField(max_length=50)
+    date = models.DateTimeField(auto_now=True)
 
-# class ReplyMessage(models.Model):
-#     PostMessage = models.ForeignKey(PostMessage, on_delete=models.CASCADE)
-#     reply = models.CharField(max_length=50)
-#     date = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return f"{self.id} {self.PostMessage} {self.reply} {self.date}"
 
-#     def __str__(self):
-#         return f"{self.id} {self.PostMessage} {self.reply} {self.date}"
+class Comments(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=256)
+    date = models.DateTimeField(auto_now=True)
 
-# class Comments(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     comment = models.CharField(max_length=256)
-#     date = models.DateTimeField(auto_now=True)
-
-#     def __str__(self):
-#         return f"{self.id} {self.user} {self.comment} {self.date}"
+    def __str__(self):
+        return f"{self.id} {self.user} {self.comment} {self.date}"
     
 class AnalyzedData(models.Model):
     date = models.DateTimeField(auto_now=True)
