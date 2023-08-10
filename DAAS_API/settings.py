@@ -28,7 +28,7 @@ SECRET_KEY = 'eh6&vk7*v!&g9ouz1*w5iye@_#y&779v9jm*)$mkp$6#%upyy+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '*']
 
 
 # Application definition
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'api',
-    'dbapi',
+    # 'dbapi',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -83,23 +83,23 @@ WSGI_APPLICATION = 'DAAS_API.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'daasapi@11;',
-        'HOST': 'db.rtqgsnvaqsegqqpymvil.supabase.co',
-        'PORT': 5432
-    }
-}
-
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'daasapi@11;',
+#         'HOST': 'db.rtqgsnvaqsegqqpymvil.supabase.co',
+#         'PORT': 5432
 #     }
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 # DATABASES['default'] = dj_database_url.config()
 
 
