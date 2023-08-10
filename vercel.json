@@ -1,14 +1,14 @@
 {
     "builds": [
       {
-        "src": "django_app_name/wsgi.py",
+        "src": "DAAS_API/wsgi.py",
         "use": "@vercel/python"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "django_app_name/wsgi.py"
+        "dest": "DAAS_API/wsgi.py"
       }
     ]
 }
